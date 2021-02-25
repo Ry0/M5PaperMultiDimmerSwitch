@@ -1,4 +1,5 @@
 #include "hap_manager.h"
+#include "assembly_info.h"
 
 hap_manager::hap_manager()
 {
@@ -28,25 +29,24 @@ void hap_manager::initialize(int button_num, bool reset)
     set_callback_storage_change(storage_changed_);
 
     // We will use for this example only one accessory (possible to use a several on the same esp)
-    // Our accessory type is light bulb , apple interface will proper show that
+    // Our accessory type is programmable switch , apple interface will proper show that
     hap_setbase_accessorytype(homekit_accessory_category_programmable_switch);
     // init base properties
-    //hap_initbase_accessory_service(model_name, manufacturer, serial_number, models_type, version);
-    hap_initbase_accessory_service("M5Paper Button", "Ry0_Ka", "0", "EspHapButton", "1.0");
+    hap_initbase_accessory_service(user_setting_model_name, user_setting_manufacturer, user_setting_serial_number, user_setting_models_type, user_setting_version);
+    // hap_initbase_accessory_service("M5Paper Button", "Ry0_Ka", "0", "EspHapButton", "1.0");
 
-    //we will add only one light bulb service and keep pointer for nest using
     button_num_ = button_num;
-    homekit_service_list_ = new homekit_service_t[button_num];
-
     for (int id = 0; id < button_num; id++)
     {
-        Serial.printf("registerd button start(Id: %d)\n", id);
-        homekit_service_list_[id] = *hap_add_button_service("Button");
-        Serial.printf("registerd button end(Id: %d)\n", id);
+        Serial.println("registerd button start(Button Id: %d)", id);
+        hap_add_button_service("Button");
+        Serial.println("registerd button end(Button Id: %d)", id);
     }
-
     //and finally init HAP
     hap_init_homekit_server();
+
+    // Get all services.
+    homekit_service_ = hap_get_server_config()->accessories[0]->services;
 }
 
 void hap_manager::format_spiffs_()
@@ -125,9 +125,9 @@ void hap_manager::notify_hap_(int button_id, uint8_t val)
     if (0 <= button_id && button_id < button_num_)
     {
         Serial.printf("button id = %d\n", button_id);
-        auto service = homekit_service_list_[button_id];
         Serial.println("notify hap");
-        homekit_characteristic_t *ch = homekit_service_characteristic_by_type(&service, HOMEKIT_CHARACTERISTIC_PROGRAMMABLE_SWITCH_EVENT);
+        homekit_characteristic_t *ch = homekit_service_characteristic_by_type(homekit_service_[button_id + 1], HOMEKIT_CHARACTERISTIC_PROGRAMMABLE_SWITCH_EVENT);
+
         if (ch)
         {
             ch->value.int_value = val;

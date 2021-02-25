@@ -6,6 +6,7 @@
 #include <FS.h>
 #include <SPIFFS.h>
 #include "data_struct.h"
+
 extern "C"
 {
 #include "homeintegration.h"
@@ -30,7 +31,7 @@ private:
     // std::vector<int> button_id_map_;
     // std::map<int, homekit_service_t> id_to_homekit_service_dic_;
     // std::vector<homekit_service_t> homekit_service_list_;
-    homekit_service_t *homekit_service_list_;
+    homekit_service_t **homekit_service_;
 
     const String pair_file_name_ = "/pair.dat";
 };
