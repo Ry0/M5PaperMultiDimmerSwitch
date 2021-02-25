@@ -10,7 +10,6 @@ void ui_manager::create_button(int x, int y, int w, int h, const uint8_t *defaul
 {
     int id = button_id_generator.get_id();
     ui_object o(id, x, y, w, h, default_image_data, tapped_image_data);
-    Serial.printf("id -> %d image adress -> %p\n", id, o.get_default_image());
     button_list_.push_back(o);
 }
 
