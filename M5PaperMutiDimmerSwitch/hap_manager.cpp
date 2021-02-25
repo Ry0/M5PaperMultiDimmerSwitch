@@ -38,9 +38,9 @@ void hap_manager::initialize(int button_num, bool reset)
     button_num_ = button_num;
     for (int id = 0; id < button_num; id++)
     {
-        Serial.println("registerd button start(Button Id: %d)", id);
+        Serial.printf("registerd button start(Button Id: %d)\n", id);
         hap_add_button_service("Button");
-        Serial.println("registerd button end(Button Id: %d)", id);
+        Serial.printf("registerd button end(Button Id: %d)\n", id);
     }
     //and finally init HAP
     hap_init_homekit_server();
