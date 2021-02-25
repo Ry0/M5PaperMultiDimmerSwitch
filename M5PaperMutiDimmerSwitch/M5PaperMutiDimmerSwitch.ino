@@ -2,13 +2,11 @@
 #include "ImageResource.h"
 #include "ui_manager.h"
 #include "hap_manager.h"
+#include "wifi_info.h"
 
 M5EPD_Canvas canvas(&M5.EPD);
 ui_manager UI(&canvas, "/GenSenRounded-R.ttf");
 hap_manager HAP;
-
-const char *ssid = "ssid";
-const char *password = "password";
 
 void setup()
 {
@@ -31,9 +29,9 @@ void setup()
     UI.create_button(50, 280 + 460, 190, 160, ImageResource_bottom_button_190x160, ImageResource_bottom_button_black_190x160);
 
     // bottom right
-    //UI.create_button(300, 60 + 460, 190, 160, ImageResource_top_button_190x160, ImageResource_top_button_black_190x160);
-    //UI.create_object(300, 220 + 460, 190, 60, ImageResource_middle_button_190x60);
-    //UI.create_button(300, 280 + 460, 190, 160, ImageResource_bottom_button_190x160, ImageResource_bottom_button_black_190x160);
+    UI.create_button(300, 60 + 460, 190, 160, ImageResource_top_button_190x160, ImageResource_top_button_black_190x160);
+    UI.create_object(300, 220 + 460, 190, 60, ImageResource_middle_button_190x60);
+    UI.create_button(300, 280 + 460, 190, 160, ImageResource_bottom_button_190x160, ImageResource_bottom_button_black_190x160);
 
     // label (x, y, font_size, color, cache_size, title);
     UI.create_label(145, 242, 24, 15, 256, "シーリングライト");
@@ -41,16 +39,18 @@ void setup()
     UI.create_label(145, 700, 24, 15, 256, "テレビ");
     UI.create_label(395, 700, 24, 15, 256, "エアコン");
 
-    // initialize after "create_xxxx"
+    // Initialize after "create_xxxx"
     UI.initialize();
 
-    // draw the initial state of UI
+    // Draw the initial state of UI
     UI.draw_all(UPDATE_MODE_GC16);
 
+    // Try to connect wifi.
     HAP.connect_wifi(ssid, password);
 
+    // Associating GUI with HAP
     auto id_num = UI.get_button_num();
-    HAP.initialize(id_num, true);
+    HAP.initialize(id_num);
 }
 
 void loop()
@@ -58,7 +58,7 @@ void loop()
     int id = UI.check_executable_button_id();
     if (id >= 0)
     {
-        Serial.printf("execute button!! (id = %d)\n", id);
+        Serial.printf("execute button (id = %d)\n", id);
         HAP.button_callback(id, button_event_single_press);
         UI.release_button(id, UPDATE_MODE_DU);
     }
