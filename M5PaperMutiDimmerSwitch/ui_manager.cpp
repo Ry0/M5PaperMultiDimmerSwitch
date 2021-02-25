@@ -4,10 +4,29 @@ ui_manager::ui_manager(M5EPD_Canvas *canvas, String font_file_path)
 {
     canvas_ = canvas;
     font_file_path_ = font_file_path;
-    // object_id_generator = id_generator();
 
     id_to_button_dic_ = new std::map<int, ui_object>;
     id_to_object_dic_ = new std::map<int, ui_object>;
+}
+
+void ui_manager::create_button(int x, int y, int w, int h, const uint8_t *default_image_data, const uint8_t *tapped_image_data)
+{
+    int id = button_id_generator.get_id();
+    ui_object o(id, x, y, w, h, default_image_data, tapped_image_data);
+    button_list_.push_back(o);
+}
+
+void ui_manager::create_object(int x, int y, int w, int h, const uint8_t *image_data)
+{
+    int id = -1;
+    ui_object o(id, x, y, w, h, image_data);
+    object_list_.push_back(o);
+}
+
+void ui_manager::create_label(int x, int y, uint8_t size, uint16_t color, uint16_t cache_size, String title)
+{
+    ui_label l(x, y, size, color, cache_size, title);
+    label_list_.push_back(l);
 }
 
 void ui_manager::initialize()
@@ -31,26 +50,6 @@ void ui_manager::initialize()
         auto obj_info = obj.get_object_info();
         id_to_object_dic_->insert(std::make_pair(obj_info.id, obj));
     }
-}
-
-void ui_manager::create_button(int x, int y, int w, int h, const uint8_t *default_image_data, const uint8_t *tapped_image_data)
-{
-    int id = button_id_generator.get_id();
-    ui_object o(id, x, y, w, h, default_image_data, tapped_image_data);
-    button_list_.push_back(o);
-}
-
-void ui_manager::create_object(int x, int y, int w, int h, const uint8_t *image_data)
-{
-    int id = -1;
-    ui_object o(id, x, y, w, h, image_data);
-    object_list_.push_back(o);
-}
-
-void ui_manager::create_label(int x, int y, uint8_t size, uint16_t color, uint16_t cache_size, String title)
-{
-    ui_label l(x, y, size, color, cache_size, title);
-    label_list_.push_back(l);
 }
 
 void ui_manager::draw_all(m5epd_update_mode_t mode)
@@ -95,7 +94,6 @@ void ui_manager::push_button(int id, m5epd_update_mode_t mode)
         auto iter = id_to_button_dic_->find(id);
         if (iter != id_to_button_dic_->end())
         {
-            Serial.printf("fill black\n");
             auto button = iter->second;
             auto pos = button.get_position();
             auto size = button.get_size();
@@ -138,70 +136,68 @@ int ui_manager::judge_touched_button_id(int x, int y)
     return -1;
 }
 
-int ui_manager::search_executable_button_id()
+int ui_manager::check_executable_button_id()
 {
     if (M5.TP.avaliable())
     {
         if (!M5.TP.isFingerUp())
         {
             M5.TP.update();
-            bool is_update = false;
-
             tp_finger_t FingerItem = M5.TP.readFinger(0);
             if ((tmp_touch_point_.x != FingerItem.x) || (tmp_touch_point_.y != FingerItem.y))
             {
-                is_update = true;
                 tmp_touch_point_.x = FingerItem.x;
                 tmp_touch_point_.y = FingerItem.y;
-                if (!touch_flag_)
+                if (touch_flag_ == false)
                 {
                     target_touch_point_.x = FingerItem.x;
                     target_touch_point_.y = FingerItem.y;
-                    int touch_id = judge_touched_button_id(target_touch_point_.x, target_touch_point_.y);
-                    Serial.printf("Finger ID:%d--> (X, y) = (%d, %d) Size: %d Judge: %d\r\n", FingerItem.id, FingerItem.x, FingerItem.y, FingerItem.size, touch_id);
-                    push_button(touch_id, UPDATE_MODE_DU);
+                    touch_id_ = judge_touched_button_id(target_touch_point_.x, target_touch_point_.y);
+                    Serial.printf("finger ID: %d --> (x, y) = (%d, %d), size: %d, button Id: %d\r\n", FingerItem.id, FingerItem.x, FingerItem.y, FingerItem.size, touch_id_);
+                    push_button(touch_id_, UPDATE_MODE_DU);
                 }
-
                 touch_flag_ = true;
             }
             else
             {
-                Serial.printf("same point touch\n");
-            }
-
-            if (is_update)
-            {
-                Serial.printf("is_update is true\n");
+                Serial.printf("same point touch.\n");
             }
         }
         else
         {
             if (touch_flag_)
             {
-                Serial.printf("touch_flag is true\n");
+                Serial.printf("finger is released.\n");
                 if ((tmp_touch_point_.x == target_touch_point_.x) || (tmp_touch_point_.y == target_touch_point_.y))
                 {
-                    int touch_id = judge_touched_button_id(tmp_touch_point_.x, tmp_touch_point_.y);
-                    if (touch_id >= 0)
+                    if (touch_id_ >= 0)
                     {
-                        return touch_id;
+                        touch_flag_ = false;
+                        return touch_id_;
+                    }
+                    else
+                    {
+                        Serial.printf("out of range of buttons.\n");
                     }
                 }
                 else
                 {
-                    Serial.printf("not execute!\n");
-                    int touch_id = judge_touched_button_id(target_touch_point_.x, target_touch_point_.y);
-                    release_button(touch_id, UPDATE_MODE_DU);
+                    Serial.printf("cancel motion is detected.\n");
+                    release_button(touch_id_, UPDATE_MODE_DU);
                 }
-
                 touch_flag_ = false;
-            }
-            else
-            {
-                Serial.printf("touch_flag is false\n");
             }
         }
     }
-
     return -1;
+}
+
+std::vector<int> ui_manager::get_button_id_list()
+{
+    std::vector<int> result;
+    for (auto iter = id_to_button_dic_->begin(); iter != id_to_button_dic_->end(); iter++)
+    {
+        result.push_back(iter->first);
+    }
+    return result;
 }

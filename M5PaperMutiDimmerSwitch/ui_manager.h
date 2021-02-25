@@ -14,17 +14,20 @@ class ui_manager
 {
 public:
     ui_manager(M5EPD_Canvas *canvas, String font_file_path);
-    void initialize();
+
     void create_button(int x, int y, int w, int h, const uint8_t *default_image_data, const uint8_t *tapped_image_data);
     void create_object(int x, int y, int w, int h, const uint8_t *image_data);
     void create_label(int x, int y, uint8_t size, uint16_t color, uint16_t cache_size, String title);
+    void initialize();
 
     void draw_all(m5epd_update_mode_t mode);
     void push_button(int id, m5epd_update_mode_t mode);
     void release_button(int id, m5epd_update_mode_t mode);
 
     int judge_touched_button_id(int x, int y);
-    int search_executable_button_id();
+    int check_executable_button_id();
+
+    std::vector<int> get_button_id_list();
 
 private:
     std::vector<ui_object> button_list_;
@@ -43,6 +46,7 @@ private:
     position tmp_touch_point_ = {0, 0};
     position target_touch_point_ = {0, 0};
     bool touch_flag_ = false;
+    int touch_id_ = -1;
 };
 
 #endif
