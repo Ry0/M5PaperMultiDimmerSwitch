@@ -27,18 +27,16 @@ public:
     int judge_touched_button_id(int x, int y);
     int check_executable_button_id();
 
-    std::vector<int> get_button_id_list();
+    int get_button_num();
 
 private:
     std::vector<ui_object> button_list_;
     std::vector<ui_object> object_list_;
+    std::vector<ui_label> label_list_;
 
-    std::map<int, ui_object> *id_to_button_dic_;
-    std::map<int, ui_object> *id_to_object_dic_;
+    int button_num_ = 0;
 
     id_generator button_id_generator;
-
-    std::vector<ui_label> label_list_;
 
     M5EPD_Canvas *canvas_;
     String font_file_path_;

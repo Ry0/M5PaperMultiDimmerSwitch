@@ -4,15 +4,13 @@ ui_manager::ui_manager(M5EPD_Canvas *canvas, String font_file_path)
 {
     canvas_ = canvas;
     font_file_path_ = font_file_path;
-
-    id_to_button_dic_ = new std::map<int, ui_object>;
-    id_to_object_dic_ = new std::map<int, ui_object>;
 }
 
 void ui_manager::create_button(int x, int y, int w, int h, const uint8_t *default_image_data, const uint8_t *tapped_image_data)
 {
     int id = button_id_generator.get_id();
     ui_object o(id, x, y, w, h, default_image_data, tapped_image_data);
+    Serial.printf("id -> %d image adress -> %p\n", id, o.get_default_image());
     button_list_.push_back(o);
 }
 
@@ -39,17 +37,7 @@ void ui_manager::initialize()
     canvas_->loadFont(font_file_path_, SD);
     canvas_->setTextDatum(TC_DATUM);
 
-    for (auto &btn : button_list_)
-    {
-        auto btn_info = btn.get_object_info();
-        id_to_button_dic_->insert(std::make_pair(btn_info.id, btn));
-    }
-
-    for (auto &obj : object_list_)
-    {
-        auto obj_info = obj.get_object_info();
-        id_to_object_dic_->insert(std::make_pair(obj_info.id, obj));
-    }
+    button_num_ = (int)button_list_.size();
 }
 
 void ui_manager::draw_all(m5epd_update_mode_t mode)
@@ -89,35 +77,25 @@ void ui_manager::draw_all(m5epd_update_mode_t mode)
 
 void ui_manager::push_button(int id, m5epd_update_mode_t mode)
 {
-    if (id >= 0)
+    if (0 <= id && id < button_num_)
     {
-        auto iter = id_to_button_dic_->find(id);
-        if (iter != id_to_button_dic_->end())
-        {
-            auto button = iter->second;
-            auto pos = button.get_position();
-            auto size = button.get_size();
-            auto image = button.get_tapped_image();
-            canvas_->pushImage(pos.x, pos.y, size.w, size.h, image);
-            canvas_->pushCanvas(0, 0, mode);
-        }
+        auto pos = button_list_[id].get_position();
+        auto size = button_list_[id].get_size();
+        auto image = button_list_[id].get_tapped_image();
+        canvas_->pushImage(pos.x, pos.y, size.w, size.h, image);
+        canvas_->pushCanvas(0, 0, mode);
     }
 }
 
 void ui_manager::release_button(int id, m5epd_update_mode_t mode)
 {
-    if (id >= 0)
+    if (0 <= id && id < button_num_)
     {
-        auto iter = id_to_button_dic_->find(id);
-        if (iter != id_to_button_dic_->end())
-        {
-            auto button = iter->second;
-            auto pos = button.get_position();
-            auto size = button.get_size();
-            auto image = button.get_default_image();
-            canvas_->pushImage(pos.x, pos.y, size.w, size.h, image);
-            canvas_->pushCanvas(0, 0, mode);
-        }
+        auto pos = button_list_[id].get_position();
+        auto size = button_list_[id].get_size();
+        auto image = button_list_[id].get_default_image();
+        canvas_->pushImage(pos.x, pos.y, size.w, size.h, image);
+        canvas_->pushCanvas(0, 0, mode);
     }
 }
 
@@ -192,12 +170,7 @@ int ui_manager::check_executable_button_id()
     return -1;
 }
 
-std::vector<int> ui_manager::get_button_id_list()
+int ui_manager::get_button_num()
 {
-    std::vector<int> result;
-    for (auto iter = id_to_button_dic_->begin(); iter != id_to_button_dic_->end(); iter++)
-    {
-        result.push_back(iter->first);
-    }
-    return result;
+    return button_num_;
 }

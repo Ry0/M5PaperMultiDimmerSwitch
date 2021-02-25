@@ -33,8 +33,9 @@ typedef struct object_info
 
 typedef enum
 {
-    NONE,
-    EXECUTE,
-} callback_result;
+    button_event_single_press,
+    button_event_double_press,
+    button_event_long_press,
+} button_event_t;
 
 #endif
