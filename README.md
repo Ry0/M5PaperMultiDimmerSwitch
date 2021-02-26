@@ -48,7 +48,7 @@ comming soon...
 If you want to change the image of the button, use the following.  
 https://github.com/m5stack/M5EPD/tree/main/tools/image2gray
 
-If you want to change the font, use the following
+If you want to change the font, use the following.  
 https://github.com/m5stack/M5EPD/tree/main/tools/ttf2bin
  
 # License
