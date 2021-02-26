@@ -5,7 +5,7 @@
 #include "wifi_info.h"
 
 M5EPD_Canvas canvas(&M5.EPD);
-ui_manager UI(&canvas, "/GenSenRounded-R.ttf");
+ui_manager UI(&canvas);
 hap_manager HAP;
 
 void setup()
@@ -34,10 +34,10 @@ void setup()
     UI.create_button(300, 280 + 460, 190, 160, ImageResource_bottom_button_190x160, ImageResource_bottom_button_black_190x160);
 
     // label (x, y, font_size, color, cache_size, title);
-    UI.create_label(145, 242, 24, 15, 256, "シーリングライト");
-    UI.create_label(395, 242, 24, 15, 256, "デスクライト");
-    UI.create_label(145, 700, 24, 15, 256, "テレビ");
-    UI.create_label(395, 700, 24, 15, 256, "エアコン");
+    UI.create_label(145, 242, 22, 15, 256, "シーリングライト");
+    UI.create_label(395, 242, 22, 15, 256, "デスクライト");
+    UI.create_label(145, 702, 22, 15, 256, "テレビ");
+    UI.create_label(395, 702, 22, 15, 256, "エアコン");
 
     // Initialize after "create_xxxx"
     UI.initialize();
@@ -55,11 +55,13 @@ void setup()
 
 void loop()
 {
+    // Return 0 or more if the button is pressed, -1 otherwise.
     int id = UI.check_executable_button_id();
     if (id >= 0)
     {
         Serial.printf("execute button (id = %d)\n", id);
         HAP.button_callback(id, button_event_single_press);
+        // When the process is finished, set the button to the default color.
         UI.release_button(id, UPDATE_MODE_DU);
     }
 }
