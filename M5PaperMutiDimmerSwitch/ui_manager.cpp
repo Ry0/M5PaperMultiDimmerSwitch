@@ -1,9 +1,9 @@
 #include "ui_manager.h"
+#include "binaryttf.h"
 
-ui_manager::ui_manager(M5EPD_Canvas *canvas, String font_file_path)
+ui_manager::ui_manager(M5EPD_Canvas *canvas)
 {
     canvas_ = canvas;
-    font_file_path_ = font_file_path;
 }
 
 void ui_manager::create_button(int x, int y, int w, int h, const uint8_t *default_image_data, const uint8_t *tapped_image_data)
@@ -33,7 +33,7 @@ void ui_manager::initialize()
     M5.EPD.Clear(true);
 
     canvas_->createCanvas(540, 960);
-    canvas_->loadFont(font_file_path_, SD);
+    canvas_->loadFont(binaryttf, sizeof(binaryttf));
     canvas_->setTextDatum(TC_DATUM);
 
     button_num_ = (int)button_list_.size();

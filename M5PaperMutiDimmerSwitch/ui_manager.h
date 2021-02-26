@@ -13,7 +13,7 @@
 class ui_manager
 {
 public:
-    ui_manager(M5EPD_Canvas *canvas, String font_file_path);
+    ui_manager(M5EPD_Canvas *canvas);
 
     void create_button(int x, int y, int w, int h, const uint8_t *default_image_data, const uint8_t *tapped_image_data);
     void create_object(int x, int y, int w, int h, const uint8_t *image_data);
@@ -39,7 +39,6 @@ private:
     id_generator button_id_generator;
 
     M5EPD_Canvas *canvas_;
-    String font_file_path_;
 
     position tmp_touch_point_ = {0, 0};
     position target_touch_point_ = {0, 0};
