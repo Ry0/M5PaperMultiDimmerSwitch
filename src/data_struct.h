@@ -1,23 +1,23 @@
 #ifndef _DATA_STRUCT_H_
 #define _DATA_STRUCT_H_
 
-typedef struct position
+typedef struct
 {
     int x;
     int y;
-};
+} position;
 
-typedef struct button_size
+typedef struct
 {
     int w;
     int h;
-};
+} button_size;
 
-typedef struct rectangle
+typedef struct
 {
     position min_pos;
     position max_pos;
-};
+} rectangle;
 
 typedef enum
 {
@@ -25,11 +25,11 @@ typedef enum
     BUTTON,
 } ui_type;
 
-typedef struct object_info
+typedef struct
 {
     int id;
     ui_type type;
-};
+} object_info;
 
 typedef enum
 {

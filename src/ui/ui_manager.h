@@ -5,7 +5,7 @@
 #include <Arduino.h>
 #include <FS.h>
 #include <vector>
-#include "data_struct.h"
+#include "../data_struct.h"
 #include "id_generator.h"
 #include "ui_object.h"
 #include "ui_label.h"

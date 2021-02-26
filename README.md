@@ -18,26 +18,23 @@ comming soon.
 # Requirement
 
 * M5Paper (Web site: https://m5stack.com/products/m5paper-esp32-development-kit-960x540-4-7-eink-display-235-ppi)
-* Arduino IDE
-* ESPHap (fork url: https://github.com/Ry0/ESPHap)
+* Platform IO
  
 # Installation
+In this repository, I used the [forked ESPHap](https://github.com/Ry0/ESPHap).
+In the [ESPHap official repository](https://github.com/Yurik72/ESPHap), only up to six buttons could be added, so I forked and changed the value of `#define`.
+And standard Arduino ESP library already contains base64.h file([here](https://github.com/Yurik72/ESPHap/pull/50)).
+This includes this change.
 
-In the official repository, only up to six buttons could be added, so I forked and changed the value of `#define`. If you want to build with the latest version, just change the relevant part in the official repository.
+wolfSSL also uses a forked repository.
 
-https://github.com/Ry0/ESPHap/commit/5b92855fc55a41edb37e49e51e06f6f79bd9f06a
-
-```bash
-cd ~/Documents/Arduino/libraries/
-git clone https://github.com/Ry0/ESPHap.git
-unrar x ESPHap/wolfssl/wolfSSL.rar
-
+```
 cd <your workspace>
 git clone https://github.com/Ry0/M5PaperMutiDimmerSwitch.git
-cd M5PaperMutiDimmerSwitch/M5PaperMutiDimmerSwitch
+cd M5PaperMutiDimmerSwitch
 ```
 
-Change your Wifi SSID and password(`wifi_info.h`).
+Change your Wifi SSID and password(`src/wifi_info.h`).
 
 ```cpp
 #ifndef _WIFI_INFO_H_
@@ -49,7 +46,7 @@ const char *password = "password";
 #endif
 ```
 
-Build it with the Arduino IDE.
+Build it by the Platform IO.
  
 # Usage
  
