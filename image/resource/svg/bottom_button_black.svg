@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="190"
+   height="160"
+   viewBox="0 0 50.270832 42.333335"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2-2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="bottom_button_black.svg"
+   inkscape:export-filename="C:\Users\ryoka\Desktop\bottom_button_black.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="170.20277"
+     inkscape:cy="149.67994"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="1639"
+     inkscape:window-height="1040"
+     inkscape:window-x="97"
+     inkscape:window-y="93"
+     inkscape:window-maximized="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid10" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="レイヤー 2">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.32292;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect846"
+       width="50.270836"
+       height="42.333336"
+       x="-3.851892e-06"
+       y="0"
+       ry="0" />
+  </g>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect12"
+       style="fill:#000000;stroke:#000000;stroke-width:0.793804;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 5.60501,41.936432 c -2.8852916,0 -5.20810801,-2.315828 -5.20810801,-5.192439 V 0.39690199 H 49.873932 V 36.743993 c 0,2.876611 -2.322817,5.192439 -5.20811,5.192439 z" />
+    <circle
+       id="path12"
+       cx="25.152382"
+       cy="21.169029"
+       style="fill:none;stroke:#000000;stroke-width:2.11666668;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       rx="5.1453085"
+       ry="5.3579202" />
+    <circle
+       style="fill:none;stroke:#ffffff;stroke-width:1.5875;stroke-linecap:round;stroke-opacity:1"
+       id="path846"
+       cx="25.135418"
+       cy="21.166668"
+       r="5.291667" />
+  </g>
+</svg>

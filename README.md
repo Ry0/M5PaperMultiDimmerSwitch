@@ -1,6 +1,6 @@
 # M5PaperMutiDimmerSwitch
 
-![img](.image/homekit-badge.png)
+![img](image/homekit-badge.png)
 
 Multiple programmable switches for HomeKit using M5Paper.
  
