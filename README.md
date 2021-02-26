@@ -37,6 +37,18 @@ git clone https://github.com/Ry0/M5PaperMutiDimmerSwitch.git
 cd M5PaperMutiDimmerSwitch/M5PaperMutiDimmerSwitch
 ```
 
+Change your Wifi SSID and password(`wifi_info.h`).
+
+```cpp
+#ifndef _WIFI_INFO_H_
+#define _WIFI_INFO_H_
+
+const char *ssid = "ssid";
+const char *password = "password";
+
+#endif
+```
+
 Build it with the Arduino IDE.
  
 # Usage
