@@ -24,7 +24,7 @@ comming soon.
 In this repository, I used the [forked ESPHap](https://github.com/Ry0/ESPHap).
 In the [ESPHap official repository](https://github.com/Yurik72/ESPHap), only up to six buttons could be added, so I forked and changed the value of `#define`.
 And standard Arduino ESP library already contains base64.h file([here](https://github.com/Yurik72/ESPHap/pull/50)).
-This includes this change.
+[forked ESPHap](https://github.com/Ry0/ESPHap) includes this change.
 
 wolfSSL also uses a forked repository.
 
