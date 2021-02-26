@@ -1,5 +1,5 @@
 #include "hap_manager.h"
-#include "assembly_info.h"
+#include "../assembly_info.h"
 
 hap_manager::hap_manager()
 {

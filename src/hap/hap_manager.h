@@ -5,7 +5,7 @@
 #include <WiFi.h>
 #include <FS.h>
 #include <SPIFFS.h>
-#include "data_struct.h"
+#include "../data_struct.h"
 
 extern "C"
 {

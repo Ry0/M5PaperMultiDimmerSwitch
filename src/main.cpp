@@ -1,7 +1,7 @@
 #include <M5EPD.h>
-#include "ImageResource.h"
-#include "ui_manager.h"
-#include "hap_manager.h"
+#include "resources/ImageResource.h"
+#include "ui/ui_manager.h"
+#include "hap/hap_manager.h"
 #include "wifi_info.h"
 
 M5EPD_Canvas canvas(&M5.EPD);

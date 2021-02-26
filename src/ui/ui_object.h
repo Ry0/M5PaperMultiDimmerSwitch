@@ -4,7 +4,7 @@
 #include <M5EPD.h>
 #include <Arduino.h>
 #include <FS.h>
-#include "data_struct.h"
+#include "../data_struct.h"
 
 class ui_object
 {

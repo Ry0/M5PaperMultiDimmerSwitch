@@ -1,5 +1,5 @@
 #include "ui_manager.h"
-#include "binaryttf.h"
+#include "../resources/binaryttf.h"
 
 ui_manager::ui_manager(M5EPD_Canvas *canvas)
 {
