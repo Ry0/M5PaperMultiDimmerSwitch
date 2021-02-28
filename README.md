@@ -6,7 +6,7 @@ Multiple programmable switches for HomeKit using M5Paper.
  
 # DEMO
  
-comming soon.
+![img](image/demo.gif)
  
 # Features
 
@@ -24,7 +24,7 @@ comming soon.
 In this repository, I used the [forked ESPHap](https://github.com/Ry0/ESPHap).
 In the [ESPHap official repository](https://github.com/Yurik72/ESPHap), only up to six buttons could be added, so I forked and changed the value of `#define`.
 And standard Arduino ESP library already contains base64.h file([here](https://github.com/Yurik72/ESPHap/pull/50)).
-[forked ESPHap](https://github.com/Ry0/ESPHap) includes this change.
+[Forked ESPHap](https://github.com/Ry0/ESPHap) includes this change.
 
 wolfSSL also uses a forked repository.
 
@@ -50,7 +50,7 @@ Build it by the Platform IO.
  
 # Usage
  
-comming soon...
+![img](image/setup.gif)
  
 # Note
  
