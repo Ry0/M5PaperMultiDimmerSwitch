@@ -2,11 +2,18 @@
 #include "resources/ImageResource.h"
 #include "ui/ui_manager.h"
 #include "hap/hap_manager.h"
+#include "system/system_util.h"
 #include "wifi_info.h"
 
 M5EPD_Canvas canvas(&M5.EPD);
 ui_manager UI(&canvas);
+system_util SYS;
 hap_manager HAP;
+
+void task0(void *arg)
+{
+    UI.draw_all_periodic(UPDATE_MODE_GC16, 12 * 60 * 60); // 12[H] = 43200[Sec]
+}
 
 void setup()
 {
@@ -46,11 +53,14 @@ void setup()
     UI.draw_all(UPDATE_MODE_GC16);
 
     // Try to connect wifi.
-    HAP.connect_wifi(ssid, password);
+    SYS.connect_wifi(ssid, password);
 
     // Associating GUI with HAP
     auto id_num = UI.get_button_num();
     HAP.initialize(id_num);
+
+    // Display refresh task
+    xTaskCreatePinnedToCore(task0, "Task0", 4096, NULL, 1, NULL, 0);
 }
 
 void loop()
