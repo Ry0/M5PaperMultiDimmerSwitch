@@ -1,8 +1,6 @@
 #ifndef _HAP_MANAGER_H_
 #define _HAP_MANAGER_H_
 
-#include <M5EPD.h>
-#include <WiFi.h>
 #include <FS.h>
 #include <SPIFFS.h>
 #include "../data_struct.h"
@@ -16,8 +14,6 @@ class hap_manager
 {
 public:
     hap_manager();
-
-    void connect_wifi(const char *ssid, const char *passphrase);
     void initialize(int button_num, bool reset = false);
     void button_callback(int button_id, button_event_t event);
 

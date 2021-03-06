@@ -74,6 +74,16 @@ void ui_manager::draw_all(m5epd_update_mode_t mode)
     canvas_->pushCanvas(0, 0, mode);
 }
 
+void ui_manager::draw_all_periodic(m5epd_update_mode_t mode, unsigned long period_sec)
+{
+    while (1)
+    {
+        delay(period_sec * 1000);
+        Serial.printf("refresh.\n");
+        draw_all(mode);
+    }
+}
+
 void ui_manager::push_button(int id, m5epd_update_mode_t mode)
 {
     if (0 <= id && id < button_num_)

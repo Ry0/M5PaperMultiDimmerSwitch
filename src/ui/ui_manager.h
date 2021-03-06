@@ -21,6 +21,7 @@ public:
     void initialize();
 
     void draw_all(m5epd_update_mode_t mode);
+    void draw_all_periodic(m5epd_update_mode_t mode, unsigned long period_sec);
     void push_button(int id, m5epd_update_mode_t mode);
     void release_button(int id, m5epd_update_mode_t mode);
 

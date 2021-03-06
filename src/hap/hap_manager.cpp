@@ -5,24 +5,6 @@ hap_manager::hap_manager()
 {
 }
 
-void hap_manager::connect_wifi(const char *ssid, const char *passphrase)
-{
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
-
-    WiFi.begin(ssid, passphrase);
-
-    while (WiFi.status() != WL_CONNECTED)
-    {
-        delay(500);
-        Serial.print(".");
-    }
-    Serial.println("");
-    Serial.println("WiFi connected");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
-}
-
 void hap_manager::initialize(int button_num, bool reset)
 {
     init_hap_storage_(reset);
