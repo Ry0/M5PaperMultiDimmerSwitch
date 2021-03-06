@@ -17,7 +17,7 @@ Multiple programmable switches for HomeKit using M5Paper.
  
 # Requirement
 
-* M5Paper (Web site: https://m5stack.com/products/m5paper-esp32-development-kit-960x540-4-7-eink-display-235-ppi)
+* M5Paper (Web site: https://m5stack-store.myshopify.com/collections/m5-core/products/m5paper-esp32-development-kit-960x540-4-7-eink-display-235-ppi)
 * Platform IO
  
 # Installation
