@@ -1,4 +1,5 @@
 # M5PaperMutiDimmerSwitch
+[![PlatformIO Build Test](https://github.com/Ry0/M5PaperMutiDimmerSwitch/actions/workflows/build-test.yaml/badge.svg)](https://github.com/Ry0/M5PaperMutiDimmerSwitch/actions/workflows/build-test.yaml)
 
 ![img](image/homekit-badge.png)
 
