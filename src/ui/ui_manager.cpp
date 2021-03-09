@@ -80,6 +80,8 @@ void ui_manager::draw_all_periodic(m5epd_update_mode_t mode, unsigned long perio
     {
         delay(period_sec * 1000);
         Serial.printf("refresh.\n");
+        M5.EPD.Clear(true);
+        delay(1000);
         draw_all(mode);
     }
 }

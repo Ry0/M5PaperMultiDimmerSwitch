@@ -12,7 +12,7 @@ hap_manager HAP;
 
 void task0(void *arg)
 {
-    UI.draw_all_periodic(UPDATE_MODE_GC16, 12 * 60 * 60); // 12[H] = 43200[Sec]
+    UI.draw_all_periodic(UPDATE_MODE_GC16, 6 * 60 * 60); // 6[H] = 21600[Sec]
 }
 
 void setup()
