@@ -32,7 +32,7 @@ wolfSSL also uses a forked repository.
 ```
 cd <your workspace>
 git clone https://github.com/Ry0/M5PaperMultiDimmerSwitch.git
-cd M5PaperMutiDimmerSwitch
+cd M5PaperMultiDimmerSwitch
 ```
 
 Change your Wifi SSID and password(`src/wifi_info.h`).
