@@ -1,4 +1,4 @@
-# M5PaperMutiDimmerSwitch
+# M5PaperMultiDimmerSwitch
 [![PlatformIO Build Test](https://github.com/Ry0/M5PaperMutiDimmerSwitch/actions/workflows/build-test.yaml/badge.svg)](https://github.com/Ry0/M5PaperMutiDimmerSwitch/actions/workflows/build-test.yaml)
 
 ![img](image/homekit-badge.png)
@@ -31,7 +31,7 @@ wolfSSL also uses a forked repository.
 
 ```
 cd <your workspace>
-git clone https://github.com/Ry0/M5PaperMutiDimmerSwitch.git
+git clone https://github.com/Ry0/M5PaperMultiDimmerSwitch.git
 cd M5PaperMutiDimmerSwitch
 ```
 
