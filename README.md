@@ -63,4 +63,4 @@ https://github.com/m5stack/M5EPD/tree/main/tools/ttf2bin
  
 # License
  
-M5PaperMutiDimmerSwitch is under [MIT license](./LICENSE)
+M5PaperMultiDimmerSwitch is under [MIT license](./LICENSE)
